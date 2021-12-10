@@ -1,0 +1,723 @@
+match
+match_id 1639177050114_hp
+match_time 1639177050118
+num_bots 1
+##MatchConfig
+mode FRIENDLY
+num_rounds 200
+random_seed 42
+move_time_limit 1000
+coin_spawn_period 5
+coin_spawn_volume 2
+##MapConfig
+map_size 75 39
+view_radius 5
+mining_radius 1
+attack_radius 3
+block 4 1
+block 5 1
+block 6 1
+block 7 1
+block 8 1
+block 9 1
+block 10 1
+block 4 2
+block 5 2
+block 6 2
+block 7 2
+block 8 2
+block 9 2
+block 10 2
+block 4 3
+block 5 3
+block 6 3
+block 7 3
+block 8 3
+block 9 3
+block 10 3
+block 4 4
+block 5 4
+block 6 4
+block 7 4
+block 8 4
+block 9 4
+block 10 4
+block 4 5
+block 5 5
+block 6 5
+block 7 5
+block 8 5
+block 9 5
+block 10 5
+block 4 6
+block 5 6
+block 6 6
+block 7 6
+block 8 6
+block 9 6
+block 10 6
+block 23 6
+block 24 6
+block 25 6
+block 26 6
+block 23 7
+block 24 7
+block 25 7
+block 26 7
+block 23 8
+block 24 8
+block 25 8
+block 26 8
+block 13 9
+block 14 9
+block 15 9
+block 16 9
+block 23 9
+block 24 9
+block 25 9
+block 26 9
+block 13 10
+block 14 10
+block 15 10
+block 16 10
+block 17 10
+block 18 10
+block 19 10
+block 20 10
+block 21 10
+block 22 10
+block 23 10
+block 24 10
+block 25 10
+block 26 10
+block 17 11
+block 18 11
+block 19 11
+block 20 11
+block 21 11
+block 22 11
+block 23 11
+block 24 11
+block 25 11
+block 26 11
+block 17 12
+block 18 12
+block 19 12
+block 20 12
+block 21 12
+block 22 12
+block 10 13
+block 11 13
+block 12 13
+block 13 13
+block 14 13
+block 17 13
+block 18 13
+block 19 13
+block 20 13
+block 21 13
+block 22 13
+block 25 13
+block 26 13
+block 27 13
+block 51 13
+block 52 13
+block 53 13
+block 54 13
+block 10 14
+block 11 14
+block 12 14
+block 13 14
+block 14 14
+block 17 14
+block 18 14
+block 19 14
+block 20 14
+block 21 14
+block 22 14
+block 25 14
+block 26 14
+block 27 14
+block 37 14
+block 38 14
+block 39 14
+block 40 14
+block 41 14
+block 42 14
+block 43 14
+block 51 14
+block 52 14
+block 53 14
+block 54 14
+block 10 15
+block 11 15
+block 12 15
+block 13 15
+block 14 15
+block 15 15
+block 25 15
+block 26 15
+block 27 15
+block 37 15
+block 38 15
+block 39 15
+block 40 15
+block 41 15
+block 42 15
+block 43 15
+block 51 15
+block 52 15
+block 53 15
+block 54 15
+block 13 16
+block 14 16
+block 15 16
+block 37 16
+block 38 16
+block 39 16
+block 40 16
+block 41 16
+block 42 16
+block 43 16
+block 51 16
+block 52 16
+block 53 16
+block 54 16
+block 13 17
+block 14 17
+block 15 17
+block 37 17
+block 38 17
+block 39 17
+block 40 17
+block 41 17
+block 42 17
+block 43 17
+block 51 17
+block 52 17
+block 53 17
+block 54 17
+block 64 21
+block 65 21
+block 68 21
+block 69 21
+block 70 21
+block 71 21
+block 72 21
+block 73 21
+block 74 21
+block 64 22
+block 65 22
+block 68 22
+block 69 22
+block 70 22
+block 71 22
+block 72 22
+block 73 22
+block 74 22
+block 64 23
+block 65 23
+block 68 23
+block 69 23
+block 70 23
+block 71 23
+block 72 23
+block 73 23
+block 74 23
+block 4 24
+block 5 24
+block 20 24
+block 21 24
+block 64 24
+block 65 24
+block 68 24
+block 69 24
+block 70 24
+block 71 24
+block 72 24
+block 73 24
+block 74 24
+block 4 25
+block 5 25
+block 20 25
+block 21 25
+block 30 25
+block 31 25
+block 32 25
+block 33 25
+block 34 25
+block 64 25
+block 65 25
+block 68 25
+block 69 25
+block 70 25
+block 71 25
+block 72 25
+block 73 25
+block 74 25
+block 4 26
+block 5 26
+block 20 26
+block 21 26
+block 30 26
+block 31 26
+block 32 26
+block 33 26
+block 34 26
+block 64 26
+block 65 26
+block 4 27
+block 5 27
+block 20 27
+block 21 27
+block 64 27
+block 65 27
+block 0 28
+block 4 28
+block 5 28
+block 20 28
+block 21 28
+block 73 28
+block 74 28
+block 0 29
+block 4 29
+block 5 29
+block 20 29
+block 21 29
+block 45 29
+block 46 29
+block 73 29
+block 74 29
+block 0 30
+block 45 30
+block 46 30
+block 68 30
+block 69 30
+block 70 30
+block 71 30
+block 72 30
+block 73 30
+block 74 30
+block 0 31
+block 45 31
+block 46 31
+block 68 31
+block 69 31
+block 70 31
+block 71 31
+block 72 31
+block 73 31
+block 74 31
+block 0 32
+block 60 32
+block 61 32
+block 62 32
+block 63 32
+block 64 32
+block 65 32
+block 66 32
+block 68 32
+block 69 32
+block 70 32
+block 71 32
+block 72 32
+block 73 32
+block 74 32
+block 0 33
+block 46 33
+block 47 33
+block 48 33
+block 49 33
+block 50 33
+block 60 33
+block 61 33
+block 62 33
+block 63 33
+block 64 33
+block 65 33
+block 66 33
+block 68 33
+block 69 33
+block 70 33
+block 71 33
+block 72 33
+block 73 33
+block 74 33
+block 0 34
+block 46 34
+block 47 34
+block 48 34
+block 49 34
+block 50 34
+block 60 34
+block 61 34
+block 62 34
+block 63 34
+block 64 34
+block 65 34
+block 66 34
+block 73 34
+block 74 34
+block 46 35
+block 47 35
+block 48 35
+block 49 35
+block 50 35
+block 46 36
+block 47 36
+block 48 36
+block 49 36
+block 50 36
+block 46 37
+block 47 37
+block 48 37
+block 49 37
+block 50 37
+block 46 38
+block 47 38
+block 48 38
+block 49 38
+block 50 38
+##BotsAndCoinsInfo
+bot_name 0 starter-bot
+bot 0 58 8
+bot_coins 0 0
+coin 5 33
+coin 69 5
+round 1
+bot 0 58 9
+round 2
+bot 0 58 10
+round 3
+bot 0 58 11
+round 4
+bot 0 58 12
+round 5
+bot 0 58 13
+coin 48 0
+coin 26 38
+round 6
+bot 0 58 14
+round 7
+bot 0 58 15
+round 8
+bot 0 58 16
+round 9
+bot 0 58 17
+round 10
+bot 0 58 18
+coin 45 4
+coin 29 34
+round 11
+bot 0 58 19
+round 12
+bot 0 58 20
+round 13
+bot 0 58 21
+round 14
+bot 0 58 22
+round 15
+bot 0 58 23
+coin 6 29
+coin 68 9
+round 16
+bot 0 58 24
+round 17
+bot 0 58 25
+round 18
+bot 0 58 26
+round 19
+bot 0 58 27
+round 20
+bot 0 58 28
+coin 19 2
+coin 55 36
+round 21
+bot 0 58 29
+round 22
+bot 0 58 30
+round 23
+bot 0 58 31
+round 24
+bot 0 58 32
+round 25
+bot 0 58 33
+coin 32 27
+coin 42 11
+round 26
+bot 0 58 34
+round 27
+bot 0 58 35
+round 28
+bot 0 58 36
+round 29
+bot 0 58 37
+round 30
+bot 0 58 38
+coin 51 6
+coin 23 32
+round 31
+bot 0 58 0
+round 32
+bot 0 57 0
+round 33
+bot 0 56 0
+round 34
+bot 0 55 0
+round 35
+bot 0 54 0
+coin 26 17
+coin 48 21
+round 36
+bot 0 53 38
+round 37
+bot 0 53 37
+round 38
+bot 0 53 36
+round 39
+bot 0 53 35
+round 40
+bot 0 53 34
+coin 6 21
+coin 68 17
+round 41
+bot 0 53 33
+round 42
+bot 0 53 32
+round 43
+bot 0 53 31
+round 44
+bot 0 53 30
+round 45
+bot 0 53 29
+coin 43 38
+coin 31 0
+round 46
+bot 0 53 28
+round 47
+bot 0 53 27
+round 48
+bot 0 53 26
+round 49
+bot 0 53 25
+round 50
+bot 0 53 24
+coin 50 4
+coin 24 34
+round 51
+bot 0 53 23
+round 52
+bot 0 53 22
+round 53
+bot 0 53 21
+round 54
+bot 0 53 20
+round 55
+bot 0 53 19
+coin 26 30
+coin 48 8
+round 56
+bot 0 53 18
+round 57
+round 58
+round 59
+round 60
+coin 68 20
+coin 6 18
+round 61
+round 62
+round 63
+round 64
+round 65
+coin 55 19
+coin 19 19
+round 66
+round 67
+round 68
+round 69
+round 70
+coin 37 24
+coin 36 14
+round 71
+round 72
+round 73
+round 74
+round 75
+coin 56 36
+coin 18 2
+round 76
+round 77
+round 78
+round 79
+round 80
+coin 5 20
+coin 69 18
+round 81
+round 82
+round 83
+round 84
+round 85
+coin 17 8
+coin 57 30
+round 86
+round 87
+round 88
+round 89
+round 90
+coin 12 37
+coin 62 1
+round 91
+round 92
+round 93
+round 94
+round 95
+coin 13 36
+coin 61 2
+round 96
+round 97
+round 98
+round 99
+round 100
+coin 29 31
+coin 45 7
+round 101
+round 102
+round 103
+round 104
+round 105
+coin 23 16
+coin 51 22
+round 106
+round 107
+round 108
+round 109
+round 110
+coin 50 15
+coin 24 23
+round 111
+round 112
+round 113
+round 114
+round 115
+coin 7 8
+coin 67 30
+round 116
+round 117
+round 118
+round 119
+round 120
+coin 7 10
+coin 67 28
+round 121
+round 122
+round 123
+round 124
+round 125
+coin 43 5
+coin 31 33
+round 126
+round 127
+round 128
+round 129
+round 130
+coin 8 28
+coin 66 10
+round 131
+round 132
+round 133
+round 134
+round 135
+coin 35 16
+coin 39 22
+round 136
+round 137
+round 138
+round 139
+round 140
+coin 13 28
+coin 61 10
+round 141
+round 142
+round 143
+round 144
+round 145
+coin 36 27
+coin 38 11
+round 146
+round 147
+round 148
+round 149
+round 150
+coin 22 35
+coin 52 3
+round 151
+round 152
+round 153
+round 154
+round 155
+coin 2 22
+coin 72 16
+round 156
+round 157
+round 158
+round 159
+round 160
+coin 44 32
+coin 30 6
+round 161
+round 162
+round 163
+round 164
+round 165
+coin 23 28
+coin 51 10
+round 166
+round 167
+round 168
+round 169
+round 170
+coin 0 18
+coin 74 20
+round 171
+round 172
+round 173
+round 174
+round 175
+coin 40 8
+coin 34 30
+round 176
+round 177
+round 178
+round 179
+round 180
+coin 28 13
+coin 46 25
+round 181
+round 182
+round 183
+round 184
+round 185
+coin 73 20
+coin 1 18
+round 186
+round 187
+round 188
+round 189
+round 190
+coin 11 7
+coin 63 31
+round 191
+round 192
+round 193
+round 194
+round 195
+coin 50 21
+coin 24 17
+round 196
+round 197
+round 198
+round 199
+round 200
+coin 0 37
+coin 74 1
+match_over 0
