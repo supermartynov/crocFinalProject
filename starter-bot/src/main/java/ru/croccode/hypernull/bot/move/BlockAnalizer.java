@@ -13,21 +13,21 @@ public class BlockAnalizer {
 
 
     public boolean blockOnLeft() {
-        if (blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y()))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y()))) {
             return true;
         }
         return false;
     }
 
     public boolean blockOnTop() {
-        if (blocks.contains(new Point(currentPoint.x(), currentPoint.y() + 1))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x(), currentPoint.y() + 1))) {
             return true;
         }
         return false;
     }
 
     public boolean blockOnDown() {
-        if (blocks.contains(new Point(currentPoint.x(), currentPoint.y() - 1))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x(), currentPoint.y() - 1))) {
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ public class BlockAnalizer {
 
 
     public boolean isTopOrDownBorder() {
-        if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight()) {
+        if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight() - 1) {
             return true;
         } else if (currentPoint.y() == 0) {
             return true;

@@ -27,8 +27,6 @@ public class BasicMove {
 
     private static String direction = "Up";
 
-    private static boolean skipCheckBorder = false;  //флаг нужен для разворота в обратную сторону
-
     private static int stepLeftAmountToChangeDirection = 0;
 
 
@@ -43,17 +41,18 @@ public class BasicMove {
         blockAnalizer = new BlockAnalizer();
         Offset offset;
 
-        if (blockAnalizer.isTopOrDownBorder() && !skipCheckBorder) {//если у нас достигнута верхняя или нижняя граница
+        if (blockAnalizer.isTopOrDownBorder()) {//если у нас достигнута верхняя или нижняя граница
             blockAnalizer.changeDirectionToTheLeft();//включаем режим смещения налево на одну клетку
         }
-//kt
+
         while (stepLeftAmountToChangeDirection > 0) { //пока не доберемся до столбца левее пробуем смещаться
             try {
                 offset = MoveOnLeft.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
-                Point point = updateDataObject.getYourPosition().apply(offset, mapSize);
-                initiallyDataObject.getPointHistoryArray()[point.x()][point.y()] = Visited.VISITED;
                 if (stepLeftAmountToChangeDirection == 0) {
-                    return blockAnalizer.changeDirectionToVerticalWays(); //передвижение налево и вниз/ввер
+                    Offset anotherOffset = blockAnalizer.changeDirectionToVerticalWays();
+                    Point point = updateDataObject.getYourPosition().apply(anotherOffset, mapSize);
+                    initiallyDataObject.getPointHistoryArray()[point.x()][point.y()] = Visited.VISITED;
+                    return anotherOffset; //передвижение налево и вниз/ввер
                 }
                 return offset;
             } catch (Exception err) {
@@ -88,14 +87,6 @@ public class BasicMove {
 
     public static void minusLeftStepsAmount(int n) {
         stepLeftAmountToChangeDirection -= n;
-    }
-
-    public static boolean isSkipCheckBorder() {
-        return skipCheckBorder;
-    }
-
-    public static void setSkipCheckBorder(boolean skipCheckBorder) {
-        BasicMove.skipCheckBorder = skipCheckBorder;
     }
 
 }
