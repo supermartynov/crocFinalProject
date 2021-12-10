@@ -46,7 +46,7 @@ public class BasicMove {
         if (blockAnalizer.isTopOrDownBorder() && !skipCheckBorder) {//если у нас достигнута верхняя или нижняя граница
             blockAnalizer.changeDirectionToTheLeft();//включаем режим смещения налево на одну клетку
         }
-
+//kt
         while (stepLeftAmountToChangeDirection > 0) { //пока не доберемся до столбца левее пробуем смещаться
             try {
                 offset = MoveOnLeft.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
