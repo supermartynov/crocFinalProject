@@ -13,6 +13,8 @@ public class InitiallyDataObject {
 
     private Visited[][] pointHistoryArray;
 
+    private int[] visitedColumns;
+
     public InitiallyDataObject(int mapWidth, int mapHeight, int botId, int viewRadius, int miningRadius)
     {
         this.mapWidth = mapWidth;
@@ -20,7 +22,8 @@ public class InitiallyDataObject {
         this.botId = botId;
         this.viewRadius = viewRadius;
         this.miningRadius = miningRadius;
-        pointHistoryArray = new Visited[mapWidth][mapHeight];
+        this.pointHistoryArray = new Visited[mapWidth][mapHeight];
+        this.visitedColumns = new int[mapWidth];
     }
 
 

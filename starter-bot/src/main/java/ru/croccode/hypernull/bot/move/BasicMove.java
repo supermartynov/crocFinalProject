@@ -17,11 +17,11 @@ public class BasicMove {
 
     static MoveWithoutBarriers moveWithoutBarriers;
 
-    static Point lastPoint;
+    static BotMove botMove;
 
     static int counter = 0;
 
-    static
+    static int lastColumn = 0;
 
     private Size mapSize;
 
@@ -34,33 +34,30 @@ public class BasicMove {
         this.updateDataObject = updateDataObject;
         this.initiallyDataObject = initiallyDataObject;
         mapSize = new Size(initiallyDataObject.getMapWidth(), initiallyDataObject.getMapHeight());
+        moveWithoutBarriers = new MoveWithoutBarriers();
+        blockAnalizer = new BlockAnalizer();
+        botMove = new BotMove();
     }
 
     public Offset go() {
-        moveWithoutBarriers = new MoveWithoutBarriers();
-        blockAnalizer = new BlockAnalizer();
         Offset offset;
 
         if (blockAnalizer.isTopOrDownBorder()) {//если у нас достигнута верхняя или нижняя граница
-            blockAnalizer.changeDirectionToTheLeft();//включаем режим смещения налево на одну клетку
+            botMove.changeDirectionToTheLeft();
+            //включаем режим смещения налево на одну клетку
         }
 
         while (stepLeftAmountToChangeDirection > 0) { //пока не доберемся до столбца левее пробуем смещаться
-            try {
-                offset = MoveOnLeft.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
-                if (stepLeftAmountToChangeDirection == 0) {
-                    Offset anotherOffset = blockAnalizer.changeDirectionToVerticalWays();
-                    Point point = updateDataObject.getYourPosition().apply(anotherOffset, mapSize);
-                    initiallyDataObject.getPointHistoryArray()[point.x()][point.y()] = Visited.VISITED;
-                    return anotherOffset; //передвижение налево и вниз/ввер
-                }
-                return offset;
-            } catch (Exception err) {
-                return new Offset(-1, 0);
+            offset = botMove.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
+            if (stepLeftAmountToChangeDirection == 0) {
+                Offset anotherOffset = botMove.changeDirectionToVerticalWays();
+                Point point = updateDataObject.getYourPosition().apply(anotherOffset, mapSize);
+                initiallyDataObject.getPointHistoryArray()[point.x()][point.y()] = Visited.VISITED;
+                return anotherOffset; //передвижение налево и вниз/ввер
             }
-
+            return offset;
         }
-        return moveWithoutBarriers.move();
+        return botMove.moveWithoutBarrires();
     }
 
     public static Visited isPointVisited(Point point) {

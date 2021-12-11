@@ -71,29 +71,4 @@ public class BlockAnalizer {
         return false;
     }
 
-    public void changeDirectionToTheLeft() {
-        switch (BasicMove.getDirection()){
-            case ("Up"):
-                BasicMove.setDirection("Up_Left");
-                BasicMove.plusLeftStepsAmount(1);
-                break;
-            case ("Down"):
-                BasicMove.setDirection("Down_Left");
-                BasicMove.plusLeftStepsAmount(1);
-                break;
-        }
-    }
-
-    public Offset changeDirectionToVerticalWays() {
-        switch (BasicMove.getDirection()){
-            case ("Up_Left"):
-                BasicMove.setDirection("Down");
-                return new Offset(-1, -1);
-            case ("Down_Left"):
-                BasicMove.setDirection("Up");
-                return new Offset(-1, 1);
-        }
-        return new Offset(0, 0);
-    }
-
 }

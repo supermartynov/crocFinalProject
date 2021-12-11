@@ -61,7 +61,7 @@ public class StarterBot implements Bot {
 
 	@Override
 	public Move onUpdate(Update update) {
-		System.out.println(updateDataObject.getBlocks());
+		//System.out.println(updateDataObject.getBlocks());
 		System.out.println(updateDataObject.getYourPosition());
 		updateDataObject.resetData(update, dataObject.getBotId());
 		basicMove = new BasicMove(updateDataObject, dataObject);
