@@ -1,8 +1,9 @@
 package ru.croccode.hypernull.bot.game_data;
 
 public enum Visited {
-    ROCK,
+    BlOCK,
     VISITED,
     COIN,
-    VISITED_COIN
+    VISITED_COIN,
+    NOT_VISITED
 }

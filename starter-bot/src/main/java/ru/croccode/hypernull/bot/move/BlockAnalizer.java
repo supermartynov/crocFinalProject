@@ -3,6 +3,7 @@ package ru.croccode.hypernull.bot.move;
 import ru.croccode.hypernull.geometry.Offset;
 import ru.croccode.hypernull.geometry.Point;
 
+import java.util.Random;
 import java.util.Set;
 
 public class BlockAnalizer {
@@ -11,61 +12,66 @@ public class BlockAnalizer {
 
     Set<Point> blocks = BasicMove.updateDataObject.getBlocks();
 
+    boolean isTopOrDownBorder() {
+        if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight() - 1) {
+            return true;
+        } else if (currentPoint.y() == 0) {
+            return true;
+        }
+        return false;
+    }
 
-    public boolean blockOnLeft() {
+    boolean blockOnLeft() {
         if (blocks != null && blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y()))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnTop() {
+    boolean blockOnTop() {
         if (blocks != null && blocks.contains(new Point(currentPoint.x(), currentPoint.y() + 1))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnDown() {
+    boolean blockOnDown() {
         if (blocks != null && blocks.contains(new Point(currentPoint.x(), currentPoint.y() - 1))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnRightAndUp() {
+    boolean blockOnRightAndUp() {
         if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y() + 1))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnLeftAndUp() {
+    boolean blockOnLeftAndUp() {
         if (blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y() + 1))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnLeftAndDown() {
+    boolean blockOnLeftAndDown() {
         if (blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y() - 1))) {
             return true;
         }
         return false;
     }
 
-    public boolean blockOnRightAndDown() {
+    boolean blockOnRightAndDown() {
         if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y() - 1))) {
             return true;
         }
         return false;
     }
 
-
-    public boolean isTopOrDownBorder() {
-        if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight() - 1) {
-            return true;
-        } else if (currentPoint.y() == 0) {
+    boolean blockOnRight() {
+        if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y()))) {
             return true;
         }
         return false;

@@ -20,15 +20,13 @@ import ru.croccode.hypernull.message.Update;
 
 public class StarterBot implements Bot {
 
-	private static final Random rnd = new Random(System.currentTimeMillis());
-
 	private final MatchMode mode;
 
 	private Offset moveOffset;
 
 	private int moveCounter = 0;
 
-	private InitiallyDataObject dataObject;
+	private InitiallyDataObject initiallyDataObject;
 
 	private UpdateDataObject updateDataObject;
 
@@ -56,17 +54,17 @@ public class StarterBot implements Bot {
 		System.out.println(width);
 		System.out.println(height);
 		updateDataObject = new UpdateDataObject();
-		dataObject = new InitiallyDataObject(width, height, id, viewRadius, miningRadius);
+		initiallyDataObject = new InitiallyDataObject(width, height, id, viewRadius, miningRadius);
 	}
 
 	@Override
 	public Move onUpdate(Update update) {
 		//System.out.println(updateDataObject.getBlocks());
-		System.out.println(updateDataObject.getYourPosition());
-		updateDataObject.resetData(update, dataObject.getBotId());
-		basicMove = new BasicMove(updateDataObject, dataObject);
+		//System.out.println(updateDataObject.getYourPosition());
+		updateDataObject.resetData(update, initiallyDataObject.getBotId());
+		basicMove = new BasicMove(updateDataObject, initiallyDataObject);
 		moveOffset = basicMove.go();
-
+		//System.out.println(update.getBotCoins().get(initiallyDataObject.getBotId()));
 		moveCounter++;
 		Move move = new Move();
 		move.setOffset(moveOffset);
@@ -75,7 +73,7 @@ public class StarterBot implements Bot {
 
 	@Override
 	public void onMatchOver(MatchOver matchOver) {
-
+		printHistoryMap();
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -89,4 +87,27 @@ public class StarterBot implements Bot {
 		new BotMatchRunner(bot, session).run();
 	}
 
+	public void printHistoryMap() {
+		System.out.println("Карта:");
+		String tmp = "";
+		for (int i = 0; i < initiallyDataObject.getMapWidth(); i++) {
+			for (int j = 0; j < initiallyDataObject.getMapHeight(); j++) {
+				switch (initiallyDataObject.getPointHistoryArray()[i][j]) {
+					case NOT_VISITED:
+						tmp = "X";
+						break;
+					case VISITED:
+						tmp = "V";
+						break;
+					case COIN:
+						tmp = "C";
+						break;
+					case BlOCK:
+						tmp = "B";
+				}
+				System.out.print(tmp + " ");
+			}
+			System.out.println();
+		}
+	}
 }

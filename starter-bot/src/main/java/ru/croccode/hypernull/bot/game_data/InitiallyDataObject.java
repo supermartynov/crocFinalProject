@@ -22,7 +22,7 @@ public class InitiallyDataObject {
         this.botId = botId;
         this.viewRadius = viewRadius;
         this.miningRadius = miningRadius;
-        this.pointHistoryArray = new Visited[mapWidth][mapHeight];
+        initArray();
         this.visitedColumns = new int[mapWidth];
     }
 
@@ -49,6 +49,15 @@ public class InitiallyDataObject {
 
     public Visited[][] getPointHistoryArray() {
         return pointHistoryArray;
+    }
+
+    public void initArray() {
+        this.pointHistoryArray = new Visited[mapWidth][mapHeight];
+        for (int i = 0; i < mapWidth; i++) {
+            for (int j = 0; j < mapHeight; j++) {
+                pointHistoryArray[i][j] = Visited.NOT_VISITED;
+            }
+        }
     }
 
     @Override
