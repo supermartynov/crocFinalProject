@@ -13,6 +13,9 @@ public class InitiallyDataObject {
 
     private Visited[][] pointHistoryArray;
 
+    public int[][] visitedArray;
+
+
     private int[] visitedColumns;
 
     public InitiallyDataObject(int mapWidth, int mapHeight, int botId, int viewRadius, int miningRadius)
@@ -56,6 +59,13 @@ public class InitiallyDataObject {
         for (int i = 0; i < mapWidth; i++) {
             for (int j = 0; j < mapHeight; j++) {
                 pointHistoryArray[i][j] = Visited.NOT_VISITED;
+            }
+        }
+
+        this.visitedArray = new int[mapWidth][mapHeight];
+        for (int i = 0; i < mapWidth; i++) {
+            for (int j = 0; j < mapHeight; j++) {
+                visitedArray[i][j] = 0;
             }
         }
     }

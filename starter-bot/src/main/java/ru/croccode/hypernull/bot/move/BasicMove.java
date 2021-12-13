@@ -17,34 +17,37 @@ public class BasicMove {
 
     static MoveWithoutBarriers moveWithoutBarriers;
 
+    static CoinAnalizer coinAnalizer;
+
     static BotMove botMove;
 
-    private Size mapSize;
+    static Size size;
+
+    public static Point targetCoin;
 
     private static String direction = "Up";
 
     private static int stepLeftAmountToChangeDirection = 0;
 
-    private static int stepRightAmountToChangeDirection = 0;
-
 
     public BasicMove(UpdateDataObject updateDataObject, InitiallyDataObject initiallyDataObject) {
         this.updateDataObject = updateDataObject;
         this.initiallyDataObject = initiallyDataObject;
-        mapSize = new Size(initiallyDataObject.getMapWidth(), initiallyDataObject.getMapHeight());
+        this.size = new Size(initiallyDataObject.getMapWidth(), initiallyDataObject.getMapHeight());
+        size = new Size(initiallyDataObject.getMapWidth(), initiallyDataObject.getMapHeight());
         moveWithoutBarriers = new MoveWithoutBarriers();
         blockAnalizer = new BlockAnalizer();
+        coinAnalizer = new CoinAnalizer();
         botMove = new BotMove();
-    }
-
-    public static int getStepRightAmountToChangeDirection() {
-        return stepRightAmountToChangeDirection;
     }
 
     public Offset go() {
         setDataInMapArray();
+        if(magic(updateDataObject.getYourPosition())) {
+            return botMove.randomOffset();
+        }
 
-        if (blockAnalizer.isTopOrDownBorder()) {//если у нас достигнута верхняя или нижняя граница
+        if (blockAnalizer.isTopOrDownBorder()) {
             botMove.changeDirectionToTheLeft();
         }
 
@@ -54,7 +57,15 @@ public class BasicMove {
             return botMove.avoidBlocksOnDown();
         }
 
-        while (stepLeftAmountToChangeDirection > 0) { //пока не доберемся до столбца левее пробуем смещаться
+        if (coinAnalizer.areThereAnyCoins()) {
+            targetCoin = coinAnalizer.getTargetCoin();
+            Offset offset = botMove.goToCoin(targetCoin);
+            if (offset.dx() != 0 || offset.dy() != 0) {
+                return offset;
+            }
+        }
+
+        while (stepLeftAmountToChangeDirection > 0) {
             Offset offset = botMove.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
             if (stepLeftAmountToChangeDirection == 0) {
                 Offset anotherOffset = botMove.changeDirectionToVerticalWays();
@@ -77,16 +88,8 @@ public class BasicMove {
         stepLeftAmountToChangeDirection += n;
     }
 
-    public static void plusRightStepsAmount(int n) {
-        stepRightAmountToChangeDirection += n;
-    }
-
     public static void minusLeftStepsAmount(int n) {
         stepLeftAmountToChangeDirection -= n;
-    }
-
-    public static void minusRightStepsAmount(int n) {
-        stepRightAmountToChangeDirection -= n;
     }
 
     public static void changeDirectionToTheOpposite() {
@@ -110,6 +113,7 @@ public class BasicMove {
         int x = updateDataObject.getYourPosition().x();
         int y = updateDataObject.getYourPosition().y();
         initiallyDataObject.getPointHistoryArray()[x][y] = Visited.VISITED;
+        initiallyDataObject.visitedArray[x][y] += 1;
 
         if (updateDataObject.getCoins() != null) {
             for (Point coin: updateDataObject.getCoins()) {
@@ -120,5 +124,14 @@ public class BasicMove {
         }
     }
 
+    public boolean magic(Point point) {
+        int x = point.x();
+        int y = point.y();
+        if (initiallyDataObject.visitedArray[x][y] > 3) {
+            initiallyDataObject.visitedArray[x][y] = 0;
+            return true;
+        }
+        return false;
+    }
 
 }

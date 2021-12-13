@@ -12,6 +12,8 @@ public class BlockAnalizer {
 
     Set<Point> blocks = BasicMove.updateDataObject.getBlocks();
 
+    public int couner = 0;
+
     boolean isTopOrDownBorder() {
         if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight() - 1) {
             return true;
@@ -73,6 +75,18 @@ public class BlockAnalizer {
     boolean blockOnRight() {
         if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y()))) {
             return true;
+        }
+        return false;
+    }
+
+    boolean isBlock(Point pointToCheck) {
+        if (blocks == null) {
+            return false;
+        }
+        for (Point block : blocks) {
+            if (pointToCheck.x() == block.x() && pointToCheck.y() == block.y()) {
+                return true;
+            }
         }
         return false;
     }

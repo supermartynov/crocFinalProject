@@ -74,6 +74,7 @@ public class StarterBot implements Bot {
 	@Override
 	public void onMatchOver(MatchOver matchOver) {
 		printHistoryMap();
+		System.out.println(BasicMove.targetCoin);
 	}
 
 	public static void main(String[] args) throws IOException {
