@@ -12,6 +12,8 @@ public class MoveWithoutBarriers {
                 return new Offset(0, -1);
             case ("Left"):
                 return new Offset(-1, 0);
+            case ("Right"):
+                return new Offset(1, 0);
             default:
                 return new Offset(0, 0);
         }

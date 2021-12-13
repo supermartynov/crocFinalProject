@@ -61,6 +61,7 @@ public class StarterBot implements Bot {
 	public Move onUpdate(Update update) {
 		//System.out.println(updateDataObject.getBlocks());
 		//System.out.println(updateDataObject.getYourPosition());
+		System.out.println(BasicMove.targetCoin);
 		updateDataObject.resetData(update, initiallyDataObject.getBotId());
 		basicMove = new BasicMove(updateDataObject, initiallyDataObject);
 		moveOffset = basicMove.go();

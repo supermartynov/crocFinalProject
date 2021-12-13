@@ -7,6 +7,8 @@ import ru.croccode.hypernull.geometry.Offset;
 import ru.croccode.hypernull.geometry.Point;
 import ru.croccode.hypernull.geometry.Size;
 
+import java.util.Set;
+
 public class BasicMove {
 
     static InitiallyDataObject initiallyDataObject;
@@ -24,6 +26,8 @@ public class BasicMove {
     static Size size;
 
     public static Point targetCoin;
+
+    Set<Point> coins;
 
     private static String direction = "Up";
 
@@ -43,6 +47,7 @@ public class BasicMove {
 
     public Offset go() {
         setDataInMapArray();
+
         if(magic(updateDataObject.getYourPosition())) {
             return botMove.randomOffset();
         }
@@ -55,14 +60,21 @@ public class BasicMove {
             return botMove.avoidBlocksOnUp();
         } else if (direction.equals("Down") && blockAnalizer.blockOnDown()) {
             return botMove.avoidBlocksOnDown();
+        } else if (direction.equals("Right")) {
+            return botMove.avoidBlocksOnUp();
+        }
+
+        if (targetCoin != null) {
+            return botMove.goToCoin(targetCoin);
         }
 
         if (coinAnalizer.areThereAnyCoins()) {
-            targetCoin = coinAnalizer.getTargetCoin();
-            Offset offset = botMove.goToCoin(targetCoin);
-            if (offset.dx() != 0 || offset.dy() != 0) {
-                return offset;
+            coins = updateDataObject.getCoins();
+            if (!coins.contains(targetCoin)) {
+                targetCoin = null;
             }
+            targetCoin = coinAnalizer.getTargetCoin();
+            return botMove.goToCoin(targetCoin);
         }
 
         while (stepLeftAmountToChangeDirection > 0) {
@@ -97,6 +109,8 @@ public class BasicMove {
             direction = "Down";
         } else if (direction.equals("Down")) {
             direction = "Up";
+        } else {
+            direction = "Right";
         }
     }
 
@@ -129,6 +143,7 @@ public class BasicMove {
         int y = point.y();
         if (initiallyDataObject.visitedArray[x][y] > 3) {
             initiallyDataObject.visitedArray[x][y] = 0;
+            changeDirectionToTheOpposite();
             return true;
         }
         return false;

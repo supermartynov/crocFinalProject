@@ -84,7 +84,7 @@ public class BlockAnalizer {
             return false;
         }
         for (Point block : blocks) {
-            if (pointToCheck.x() == block.x() && pointToCheck.y() == block.y()) {
+            if (pointToCheck.equals(block)) {
                 return true;
             }
         }

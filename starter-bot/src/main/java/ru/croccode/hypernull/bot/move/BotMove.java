@@ -4,6 +4,7 @@ import ru.croccode.hypernull.geometry.Offset;
 import ru.croccode.hypernull.geometry.Point;
 
 import java.util.Random;
+import java.util.Set;
 
 public class BotMove {
 
@@ -43,40 +44,37 @@ public class BotMove {
         if (BasicMove.getDirection().equals("Up_Left")) {
 
             if (!blockAnalizer.blockOnDown()) {
-                BasicMove.plusLeftStepsAmount(1);
-                //BasicMove.setStepUpAmount(1);
                 return new Offset(0, -1);
             }
 
             if (!blockAnalizer.blockOnLeftAndDown()) {
-                BasicMove.minusLeftStepsAmount(1);
                 return new Offset(-1, -1);
             }
 
             if (!blockAnalizer.blockOnRightAndDown()) {
-                //BasicMove.setStepUpAmount(1);
-                BasicMove.plusLeftStepsAmount(2);
                 return new Offset(1, -1);
             }
+
+            BasicMove.setDirection("Up");
+            return new Offset(0,1);
         }
 
         if (BasicMove.getDirection().equals("Down_Left")) {
 
             if (!blockAnalizer.blockOnTop()) {
-                // BasicMove.setStepDownAmount(1);
                 return new Offset(0, 1);
             }
 
             if (blockAnalizer.blockOnLeftAndUp()) {
-                BasicMove.minusLeftStepsAmount(1);
                 return new Offset(-1, 1);
             }
 
             if (blockAnalizer.blockOnRightAndUp()) {
-                //BasicMove.setStepDownAmount(1);
-                BasicMove.plusLeftStepsAmount(1);
                 return new Offset(1, 1);
             }
+
+            BasicMove.setDirection("Down");
+            return new Offset(0,-1);
 
         }
 
@@ -111,6 +109,9 @@ public class BotMove {
     public Offset avoidBlocksOnUp() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
 
+        if (!blockAnalizer.blockOnTop()) {
+            return new Offset(0, 1);
+        }
         if (blockAnalizer.blockOnTop() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
         }
@@ -119,6 +120,10 @@ public class BotMove {
             return new Offset(-1, 1);
         }
 
+        if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnDown() &&
+                blockAnalizer.blockOnLeftAndDown() && blockAnalizer.blockOnRightAndDown()) {
+            BasicMove.setDirection("Right");
+        }
 
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && !blockAnalizer.blockOnLeftAndDown()) {
             return new Offset(-1, -1);
@@ -157,6 +162,10 @@ public class BotMove {
 
     public Offset avoidBlocksOnDown() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
+
+        if (!blockAnalizer.blockOnDown()) {
+            return new Offset(0, -1);
+        }
 
         if (blockAnalizer.blockOnDown() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
@@ -207,7 +216,7 @@ public class BotMove {
     public Offset goToCoin(Point coin) {
 
         if (currentPosition.offsetTo(coin, BasicMove.size).length() < BasicMove.initiallyDataObject.getViewRadius()
-        && currentPosition.offsetTo(coin, BasicMove.size).length() >= BasicMove.initiallyDataObject.getMiningRadius()) {
+                && currentPosition.offsetTo(coin, BasicMove.size).length() >= BasicMove.initiallyDataObject.getMiningRadius()) {
 
             int dx = coin.x() - currentPosition.x();
             int dy = coin.y() - currentPosition.y();
@@ -235,6 +244,7 @@ public class BotMove {
     }
 
     public Offset randomOffset() {
+        BasicMove.changeDirectionToTheOpposite();
         return new Offset(
                 rnd.nextInt(3) - 1,
                 rnd.nextInt(3) - 1
