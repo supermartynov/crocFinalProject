@@ -122,12 +122,21 @@ public class BotMove {
     public Offset avoidBlocksOnUp() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
 
+
         if (blockAnalizer.blockOnTop() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
         }
 
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && !blockAnalizer.blockOnLeftAndUp()) {
             return new Offset(-1, 1);
+        }
+
+        if (!blockAnalizer.blockOnLeftAndUp()) {
+            return new Offset(-1, 1);
+        }
+
+        if (!blockAnalizer.blockOnRightAndUp()) {
+            return new Offset(1, 1);
         }
 
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnDown() &&
@@ -173,6 +182,14 @@ public class BotMove {
     public Offset avoidBlocksOnDown() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
 
+        if (!blockAnalizer.blockOnRightAndDown()) {
+            return new Offset(1, -1);
+        }
+
+        if (!blockAnalizer.blockOnLeftAndDown()) {
+            return new Offset(-1, -1);
+        }
+
         if (blockAnalizer.blockOnDown() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
         }
@@ -188,13 +205,19 @@ public class BotMove {
         }
 
         if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRightAndDown())
+        {
+            return new Offset(1, -1);
+        }
+
+        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
                 && blockAnalizer.blockOnRightAndDown() && blockAnalizer.blockOnRight())
         {
             BasicMove.changeDirectionToTheOpposite();
             return new Offset(0, 1);
         }
 
-        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
+        /*if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
                 && blockAnalizer.blockOnRightAndDown())
         {
             if (!blockAnalizer.blockOnRight() && !blockAnalizer.blockOnRightAndDown()) {
@@ -207,7 +230,7 @@ public class BotMove {
                         rnd.nextInt(3) - 1
                 );
             }
-        }
+        }*/
 
         if (blockAnalizer.blockOnRight() && !blockAnalizer.blockOnRightAndDown()) {
             return new Offset(1, -1);
@@ -234,8 +257,17 @@ public class BotMove {
             int offsetOnX = 0;
             int offsetOnY = 0;
 
-            offsetOnX = dx > 0 ?  1 : -1;
-            offsetOnY = dy > 0 ? 1 : -1;
+            if (dx == 0) {
+                offsetOnX = 0;
+            } else {
+                offsetOnX = dx > 0 ?  (dx / dx) : (dx / dx) * -1;
+            }
+
+            if (dy == 0) {
+                offsetOnY = 0;
+            } else {
+                offsetOnY = dy > 0 ?  (dy / dy) : (dy / dy) * -1;
+            }
 
             if (dy < 0) {
                 BasicMove.setDirection("Down");
@@ -249,9 +281,8 @@ public class BotMove {
                     return avoidBlocksOnUp();
                 } else if (BasicMove.getDirection().equals("Down")){
                     return avoidBlocksOnDown();
-                }
+                }  else return randomOffset();
             }
-            System.out.println("Я вот тууут");
 
 
             return new Offset(offsetOnX, offsetOnY);
