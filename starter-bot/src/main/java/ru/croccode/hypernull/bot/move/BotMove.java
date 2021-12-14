@@ -154,6 +154,20 @@ public class BotMove {
             return new Offset(0, -1);
         }
 
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRight()
+        ) {
+            BasicMove.setDirection("Right");
+            return new Offset(1, 0);
+        }
+
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRightAndUp()
+        ) {
+            BasicMove.setDirection("Right");
+            return new Offset(1, 1);
+        }
+
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft()
                 && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown())
         {
@@ -188,6 +202,20 @@ public class BotMove {
 
         if (!blockAnalizer.blockOnLeftAndDown()) {
             return new Offset(-1, -1);
+        }
+
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRight()
+        ) {
+            BasicMove.setDirection("Right");
+            return new Offset(1, 0);
+        }
+
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRightAndUp()
+        ) {
+            BasicMove.setDirection("Right");
+            return new Offset(1, 1);
         }
 
         if (blockAnalizer.blockOnDown() && !blockAnalizer.blockOnLeft()) {
