@@ -47,6 +47,7 @@ public class BasicMove {
 
     public Offset go() {
         setDataInMapArray();
+        coins = updateDataObject.getCoins();
 
         if(magic(updateDataObject.getYourPosition())) {
             return botMove.randomOffset();
@@ -54,6 +55,14 @@ public class BasicMove {
 
         if (blockAnalizer.isTopOrDownBorder()) {
             botMove.changeDirectionToTheLeft();
+            while (stepLeftAmountToChangeDirection > 0) {
+                Offset offset = botMove.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
+                if (stepLeftAmountToChangeDirection == 0) {
+                    Offset anotherOffset = botMove.changeDirectionToVerticalWays();
+                    return anotherOffset; //передвижение налево и вниз/ввер
+                }
+                return offset;
+            }
         }
 
         if (direction.equals("Up") && blockAnalizer.blockOnTop()) {
@@ -70,21 +79,15 @@ public class BasicMove {
 
         if (coinAnalizer.areThereAnyCoins()) {
             coins = updateDataObject.getCoins();
-            if (!coins.contains(targetCoin)) {
-                targetCoin = null;
-            }
             targetCoin = coinAnalizer.getTargetCoin();
             return botMove.goToCoin(targetCoin);
         }
 
-        while (stepLeftAmountToChangeDirection > 0) {
-            Offset offset = botMove.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
-            if (stepLeftAmountToChangeDirection == 0) {
-                Offset anotherOffset = botMove.changeDirectionToVerticalWays();
-                return anotherOffset; //передвижение налево и вниз/ввер
-            }
-            return offset;
+        if (coins != null && !coins.contains(targetCoin)) {
+            targetCoin = null;
         }
+
+
         return botMove.moveWithoutBarrires();
     }
 

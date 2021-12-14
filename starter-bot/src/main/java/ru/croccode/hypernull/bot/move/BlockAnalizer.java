@@ -59,21 +59,21 @@ public class BlockAnalizer {
     }
 
     boolean blockOnLeftAndDown() {
-        if (blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y() - 1))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x() - 1, currentPoint.y() - 1))) {
             return true;
         }
         return false;
     }
 
     boolean blockOnRightAndDown() {
-        if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y() - 1))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y() - 1))) {
             return true;
         }
         return false;
     }
 
     boolean blockOnRight() {
-        if (blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y()))) {
+        if (blocks != null && blocks.contains(new Point(currentPoint.x() + 1, currentPoint.y()))) {
             return true;
         }
         return false;

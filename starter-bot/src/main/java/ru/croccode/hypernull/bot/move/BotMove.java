@@ -44,14 +44,17 @@ public class BotMove {
         if (BasicMove.getDirection().equals("Up_Left")) {
 
             if (!blockAnalizer.blockOnDown()) {
+
                 return new Offset(0, -1);
             }
 
             if (!blockAnalizer.blockOnLeftAndDown()) {
+                BasicMove.minusLeftStepsAmount(1);
                 return new Offset(-1, -1);
             }
 
             if (!blockAnalizer.blockOnRightAndDown()) {
+                BasicMove.plusLeftStepsAmount(1);
                 return new Offset(1, -1);
             }
 
@@ -66,10 +69,12 @@ public class BotMove {
             }
 
             if (blockAnalizer.blockOnLeftAndUp()) {
+                BasicMove.minusLeftStepsAmount(1);
                 return new Offset(-1, 1);
             }
 
             if (blockAnalizer.blockOnRightAndUp()) {
+                BasicMove.plusLeftStepsAmount(1);
                 return new Offset(1, 1);
             }
 
@@ -109,9 +114,6 @@ public class BotMove {
     public Offset avoidBlocksOnUp() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
 
-        if (!blockAnalizer.blockOnTop()) {
-            return new Offset(0, 1);
-        }
         if (blockAnalizer.blockOnTop() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
         }
@@ -162,10 +164,6 @@ public class BotMove {
 
     public Offset avoidBlocksOnDown() {
         BlockAnalizer blockAnalizer = new BlockAnalizer();
-
-        if (!blockAnalizer.blockOnDown()) {
-            return new Offset(0, -1);
-        }
 
         if (blockAnalizer.blockOnDown() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
@@ -235,7 +233,18 @@ public class BotMove {
                     return avoidBlocksOnDown();
                 }
             }
-
+            System.out.println("Вот позиция наша");
+            System.out.println(BasicMove.updateDataObject.getYourPosition());
+            System.out.println("Вот сюда он говорит смещаться");
+            System.out.println(new Point(offsetOnX, offsetOnY));
+            System.out.println("Ниже видимвые поля");
+            System.out.println(BasicMove.updateDataObject.getBlocks());
+            System.out.println("Выше видимые блоки");
+            System.out.println(BasicMove.getDirection());
+            System.out.println("Выше направление");
+            System.out.println(blockAnalizer.isBlock(point));
+            System.out.println("Есть ли блок на смещении - " + point);
+            System.out.println("------------------------------------");
             return new Offset(offsetOnX, offsetOnY);
         }
 
