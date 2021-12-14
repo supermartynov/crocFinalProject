@@ -213,8 +213,12 @@ public class BotMove {
 
     public Offset goToCoin(Point coin) {
 
-        if (currentPosition.offsetTo(coin, BasicMove.size).length() < BasicMove.initiallyDataObject.getViewRadius()
-                && currentPosition.offsetTo(coin, BasicMove.size).length() >= BasicMove.initiallyDataObject.getMiningRadius()) {
+        System.out.println("Расстояние до точки:");
+        System.out.println(currentPosition.offsetTo(coin, BasicMove.size).length());
+        System.out.println("Майнинг радиус");
+        System.out.println(BasicMove.initiallyDataObject.getMiningRadius());
+        if (currentPosition.offsetTo(coin, BasicMove.size).length() < BasicMove.initiallyDataObject.getViewRadius() - 1
+                && currentPosition.offsetTo(coin, BasicMove.size).length() >= BasicMove.initiallyDataObject.getMiningRadius() - 1) {
 
             int dx = coin.x() - currentPosition.x();
             int dy = coin.y() - currentPosition.y();
@@ -225,6 +229,12 @@ public class BotMove {
             offsetOnX = dx > 0 ?  1 : -1;
             offsetOnY = dy > 0 ? 1 : -1;
 
+            if (dy < 0) {
+                BasicMove.setDirection("Down");
+            } else if (dy > 0) {
+                BasicMove.setDirection("Up");
+            }
+
             Point point = currentPosition.apply(new Offset(offsetOnX, offsetOnY), BasicMove.size);
             if (blockAnalizer.isBlock(point)) {
                 if (BasicMove.getDirection().equals("Up")) {
@@ -233,18 +243,9 @@ public class BotMove {
                     return avoidBlocksOnDown();
                 }
             }
-            System.out.println("Вот позиция наша");
-            System.out.println(BasicMove.updateDataObject.getYourPosition());
-            System.out.println("Вот сюда он говорит смещаться");
-            System.out.println(new Point(offsetOnX, offsetOnY));
-            System.out.println("Ниже видимвые поля");
-            System.out.println(BasicMove.updateDataObject.getBlocks());
-            System.out.println("Выше видимые блоки");
-            System.out.println(BasicMove.getDirection());
-            System.out.println("Выше направление");
-            System.out.println(blockAnalizer.isBlock(point));
-            System.out.println("Есть ли блок на смещении - " + point);
-            System.out.println("------------------------------------");
+            System.out.println("Я вот тууут");
+
+
             return new Offset(offsetOnX, offsetOnY);
         }
 
@@ -253,7 +254,9 @@ public class BotMove {
     }
 
     public Offset randomOffset() {
+        System.out.println(BasicMove.getDirection());
         BasicMove.changeDirectionToTheOpposite();
+        System.out.println(BasicMove.getDirection());
         return new Offset(
                 rnd.nextInt(3) - 1,
                 rnd.nextInt(3) - 1

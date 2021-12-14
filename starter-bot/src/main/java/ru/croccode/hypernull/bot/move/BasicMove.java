@@ -65,16 +65,22 @@ public class BasicMove {
             }
         }
 
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnTop() && blockAnalizer.blockOnDown()
+                && direction.equals("Left")) {
+            direction.equals("Right");
+        }
+
+        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnRight() && blockAnalizer.blockOnLeft()
+                && direction.equals("Down")) {
+            direction.equals("Up");
+        }
+
         if (direction.equals("Up") && blockAnalizer.blockOnTop()) {
             return botMove.avoidBlocksOnUp();
         } else if (direction.equals("Down") && blockAnalizer.blockOnDown()) {
             return botMove.avoidBlocksOnDown();
-        } else if (direction.equals("Right")) {
+        } else if (direction.equals("Right") && blockAnalizer.blockOnRight()) {
             return botMove.avoidBlocksOnUp();
-        }
-
-        if (targetCoin != null) {
-            return botMove.goToCoin(targetCoin);
         }
 
         if (coinAnalizer.areThereAnyCoins()) {
@@ -86,7 +92,6 @@ public class BasicMove {
         if (coins != null && !coins.contains(targetCoin)) {
             targetCoin = null;
         }
-
 
         return botMove.moveWithoutBarrires();
     }
@@ -112,8 +117,6 @@ public class BasicMove {
             direction = "Down";
         } else if (direction.equals("Down")) {
             direction = "Up";
-        } else {
-            direction = "Right";
         }
     }
 
@@ -146,7 +149,6 @@ public class BasicMove {
         int y = point.y();
         if (initiallyDataObject.visitedArray[x][y] > 3) {
             initiallyDataObject.visitedArray[x][y] = 0;
-            changeDirectionToTheOpposite();
             return true;
         }
         return false;
