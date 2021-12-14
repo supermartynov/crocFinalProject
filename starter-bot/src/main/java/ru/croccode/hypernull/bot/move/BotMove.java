@@ -43,10 +43,6 @@ public class BotMove {
 
         if (BasicMove.getDirection().equals("Up_Left")) {
 
-            if (!blockAnalizer.blockOnDown()) {
-
-                return new Offset(0, -1);
-            }
 
             if (!blockAnalizer.blockOnLeftAndDown()) {
                 BasicMove.minusLeftStepsAmount(1);
@@ -58,15 +54,21 @@ public class BotMove {
                 return new Offset(1, -1);
             }
 
+            if (!blockAnalizer.blockOnDown()) {
+                return new Offset(0, -1);
+            }
+
+            if (!blockAnalizer.blockOnTop()) {
+                BasicMove.setDirection("Down_Left");
+                return new Offset(0, 1);
+            }
+
             BasicMove.setDirection("Up");
             return new Offset(0,1);
         }
 
         if (BasicMove.getDirection().equals("Down_Left")) {
 
-            if (!blockAnalizer.blockOnTop()) {
-                return new Offset(0, 1);
-            }
 
             if (blockAnalizer.blockOnLeftAndUp()) {
                 BasicMove.minusLeftStepsAmount(1);
@@ -78,8 +80,14 @@ public class BotMove {
                 return new Offset(1, 1);
             }
 
-            BasicMove.setDirection("Down");
-            return new Offset(0,-1);
+            if (!blockAnalizer.blockOnTop()) {
+                return new Offset(0, 1);
+            }
+
+            if (!blockAnalizer.blockOnTop()) {
+                BasicMove.setDirection("Up_Left");
+                return new Offset(0, -1);
+            }
 
         }
 
@@ -249,7 +257,6 @@ public class BotMove {
             return new Offset(offsetOnX, offsetOnY);
         }
 
-        BasicMove.targetCoin = null;
         return moveWithoutBarriers.move();
     }
 

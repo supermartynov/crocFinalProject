@@ -67,12 +67,12 @@ public class BasicMove {
 
         if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnTop() && blockAnalizer.blockOnDown()
                 && direction.equals("Left")) {
-            direction.equals("Right");
+            setDirection("Right");
         }
 
         if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnRight() && blockAnalizer.blockOnLeft()
                 && direction.equals("Down")) {
-            direction.equals("Up");
+            setDirection("Right");
         }
 
         if (direction.equals("Up") && blockAnalizer.blockOnTop()) {
@@ -80,7 +80,12 @@ public class BasicMove {
         } else if (direction.equals("Down") && blockAnalizer.blockOnDown()) {
             return botMove.avoidBlocksOnDown();
         } else if (direction.equals("Right") && blockAnalizer.blockOnRight()) {
+            setDirection("Up");
             return botMove.avoidBlocksOnUp();
+        }
+
+        if (coins != null && !coins.contains(targetCoin)) {
+            targetCoin = null;
         }
 
         if (coinAnalizer.areThereAnyCoins()) {
@@ -89,9 +94,6 @@ public class BasicMove {
             return botMove.goToCoin(targetCoin);
         }
 
-        if (coins != null && !coins.contains(targetCoin)) {
-            targetCoin = null;
-        }
 
         return botMove.moveWithoutBarrires();
     }
