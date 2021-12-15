@@ -130,24 +130,24 @@ public class BotMove {
             return new Offset(-1, 1);
         }
 
-        if (!blockAnalizer.blockOnRightAndUp()) {
-            return new Offset(1, 1);
-        }
-
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnRight()
                 && blockAnalizer.blockOnRightAndUp() && blockAnalizer.blockOnLeftAndUp()) {
             BasicMove.changeDirectionToTheOpposite();
             return new Offset(0, -1);
         }
 
+        if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && !blockAnalizer.blockOnLeftAndDown()) {
+            return new Offset(-1, -1);
+        }
+
+        if (!blockAnalizer.blockOnRightAndUp()) {
+            return new Offset(1, 1);
+        }
+
         if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnDown() &&
                 blockAnalizer.blockOnLeftAndDown() && blockAnalizer.blockOnRightAndDown() && !blockAnalizer.blockOnRight()) {
             BasicMove.setDirection("Right");
             return new Offset(1, 0);
-        }
-
-        if (blockAnalizer.blockOnTop() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && !blockAnalizer.blockOnLeftAndDown()) {
-            return new Offset(-1, -1);
         }
 
         if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
@@ -185,13 +185,6 @@ public class BotMove {
             return new Offset(-1, -1);
         }
 
-        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
-                && !blockAnalizer.blockOnRight()
-        ) {
-            BasicMove.setDirection("Right");
-            return new Offset(1, 0);
-        }
-
         if (blockAnalizer.blockOnDown() && !blockAnalizer.blockOnLeft()) {
             return new Offset(-1, 0);
         }
@@ -201,23 +194,32 @@ public class BotMove {
         }
 
         if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
-                && !blockAnalizer.blockOnRightAndDown())
-        {
-            return new Offset(1, -1);
-        }
-
-        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
-                && !blockAnalizer.blockOnRightAndDown())
-        {
-            return new Offset(1, -1);
-        }
-
-        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
                 && blockAnalizer.blockOnRightAndDown() && blockAnalizer.blockOnRight())
         {
             BasicMove.changeDirectionToTheOpposite();
             return new Offset(0, 1);
         }
+
+        if (blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndUp() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRight()
+        ) {
+            BasicMove.setDirection("Right");
+            return new Offset(1, 0);
+        }
+
+
+        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRightAndDown())
+        {
+            return new Offset(1, -1);
+        }
+
+        if (blockAnalizer.blockOnDown() && blockAnalizer.blockOnLeft() && blockAnalizer.blockOnLeftAndDown()
+                && !blockAnalizer.blockOnRightAndDown())
+        {
+            return new Offset(1, -1);
+        }
+
 
         if (blockAnalizer.blockOnRight() && !blockAnalizer.blockOnRightAndDown()) {
             return new Offset(1, -1);
