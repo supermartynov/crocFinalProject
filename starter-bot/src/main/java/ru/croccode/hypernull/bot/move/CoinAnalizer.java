@@ -1,11 +1,8 @@
 package ru.croccode.hypernull.bot.move;
 
-import ru.croccode.hypernull.bot.game_data.InitiallyDataObject;
-import ru.croccode.hypernull.bot.game_data.UpdateDataObject;
 import ru.croccode.hypernull.geometry.Point;
 import ru.croccode.hypernull.geometry.Size;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class CoinAnalizer {

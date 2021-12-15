@@ -33,7 +33,6 @@ public class BasicMove {
 
     private static int stepLeftAmountToChangeDirection = 0;
 
-
     public BasicMove(UpdateDataObject updateDataObject, InitiallyDataObject initiallyDataObject) {
         this.updateDataObject = updateDataObject;
         this.initiallyDataObject = initiallyDataObject;
@@ -56,10 +55,10 @@ public class BasicMove {
         if (blockAnalizer.isTopOrDownBorder()) {
             botMove.changeDirectionToTheLeft();
             while (stepLeftAmountToChangeDirection > 0) {
-                Offset offset = botMove.moveOnLeftToChangeDirection(); //передвижение налево не зафиксировано
+                Offset offset = botMove.moveOnLeftToChangeDirection();
                 if (stepLeftAmountToChangeDirection == 0) {
                     Offset anotherOffset = botMove.changeDirectionToVerticalWays();
-                    return anotherOffset; //передвижение налево и вниз/ввер
+                    return anotherOffset;
                 }
                 return offset;
             }
@@ -93,8 +92,7 @@ public class BasicMove {
             targetCoin = coinAnalizer.getTargetCoin();
             return botMove.goToCoin(targetCoin);
         }
-
-
+        
         return botMove.moveWithoutBarrires();
     }
 
@@ -123,7 +121,6 @@ public class BasicMove {
     }
 
     public void setDataInMapArray() {
-
         if (updateDataObject.getBlocks() != null) {
             for (Point block : updateDataObject.getBlocks()) {
                 if (initiallyDataObject.getPointHistoryArray()[block.x()][block.y()] == Visited.NOT_VISITED) {

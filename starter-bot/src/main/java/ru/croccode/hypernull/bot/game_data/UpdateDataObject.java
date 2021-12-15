@@ -15,14 +15,6 @@ public class UpdateDataObject {
 
     private Point yourPosition;
 
-
-    public UpdateDataObject(Update update, int yourId) {
-        coins = update.getCoins();
-        bots = update.getBots();
-        blocks = update.getBlocks();
-        yourPosition = update.getBots().get(yourId);
-    }
-
     public UpdateDataObject() {
     }
 

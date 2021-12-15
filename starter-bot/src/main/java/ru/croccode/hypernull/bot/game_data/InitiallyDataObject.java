@@ -1,5 +1,7 @@
 package ru.croccode.hypernull.bot.game_data;
 
+import ru.croccode.hypernull.message.MatchStarted;
+
 public class InitiallyDataObject {
     private final int mapWidth;
 
@@ -15,18 +17,14 @@ public class InitiallyDataObject {
 
     public int[][] visitedArray;
 
-
-    private int[] visitedColumns;
-
-    public InitiallyDataObject(int mapWidth, int mapHeight, int botId, int viewRadius, int miningRadius)
+    public InitiallyDataObject(MatchStarted matchStarted)
     {
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
-        this.botId = botId;
-        this.viewRadius = viewRadius;
-        this.miningRadius = miningRadius;
+        this.mapWidth = matchStarted.getMapSize().width();
+        this.mapHeight = matchStarted.getMapSize().height();
+        this.botId = matchStarted.getYourId();
+        this.viewRadius = matchStarted.getViewRadius();
+        this.miningRadius = matchStarted.getMiningRadius();
         initArray();
-        this.visitedColumns = new int[mapWidth];
     }
 
 
@@ -56,15 +54,10 @@ public class InitiallyDataObject {
 
     public void initArray() {
         this.pointHistoryArray = new Visited[mapWidth][mapHeight];
-        for (int i = 0; i < mapWidth; i++) {
-            for (int j = 0; j < mapHeight; j++) {
-                pointHistoryArray[i][j] = Visited.NOT_VISITED;
-            }
-        }
-
         this.visitedArray = new int[mapWidth][mapHeight];
         for (int i = 0; i < mapWidth; i++) {
             for (int j = 0; j < mapHeight; j++) {
+                pointHistoryArray[i][j] = Visited.NOT_VISITED;
                 visitedArray[i][j] = 0;
             }
         }

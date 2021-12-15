@@ -4,6 +4,5 @@ public enum Visited {
     BlOCK,
     VISITED,
     COIN,
-    VISITED_COIN,
     NOT_VISITED
 }

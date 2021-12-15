@@ -3,7 +3,6 @@ package ru.croccode.hypernull.bot;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Random;
 
 import ru.croccode.hypernull.bot.game_data.InitiallyDataObject;
 import ru.croccode.hypernull.bot.game_data.UpdateDataObject;
@@ -40,32 +39,21 @@ public class StarterBot implements Bot {
 	public Register onHello(Hello hello) {
 		Register register = new Register();
 		register.setMode(mode);
-		register.setBotName("starter-bot");
+		register.setBotName("Martynov");
 		return register;
 	}
 
 	@Override
 	public void onMatchStarted(MatchStarted matchStarted) {
-		int width = matchStarted.getMapSize().width();
-		int height = matchStarted.getMapSize().height();
-		int id = matchStarted.getYourId();
-		int viewRadius = matchStarted.getViewRadius();
-		int miningRadius = matchStarted.getMiningRadius();
-		System.out.println(width);
-		System.out.println(height);
 		updateDataObject = new UpdateDataObject();
-		initiallyDataObject = new InitiallyDataObject(width, height, id, viewRadius, miningRadius);
+		initiallyDataObject = new InitiallyDataObject(matchStarted);
 	}
 
 	@Override
 	public Move onUpdate(Update update) {
-		//System.out.println(updateDataObject.getBlocks());
-		//System.out.println(updateDataObject.getYourPosition());
-		System.out.println(BasicMove.targetCoin);
 		updateDataObject.resetData(update, initiallyDataObject.getBotId());
 		basicMove = new BasicMove(updateDataObject, initiallyDataObject);
 		moveOffset = basicMove.go();
-		//System.out.println(update.getBotCoins().get(initiallyDataObject.getBotId()));
 		moveCounter++;
 		Move move = new Move();
 		move.setOffset(moveOffset);
@@ -75,7 +63,6 @@ public class StarterBot implements Bot {
 	@Override
 	public void onMatchOver(MatchOver matchOver) {
 		printHistoryMap();
-		System.out.println(BasicMove.targetCoin);
 	}
 
 	public static void main(String[] args) throws IOException {

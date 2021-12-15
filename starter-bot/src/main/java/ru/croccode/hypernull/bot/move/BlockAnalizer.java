@@ -1,9 +1,6 @@
 package ru.croccode.hypernull.bot.move;
 
-import ru.croccode.hypernull.geometry.Offset;
 import ru.croccode.hypernull.geometry.Point;
-
-import java.util.Random;
 import java.util.Set;
 
 public class BlockAnalizer {
@@ -12,7 +9,6 @@ public class BlockAnalizer {
 
     Set<Point> blocks = BasicMove.updateDataObject.getBlocks();
 
-    public int couner = 0;
 
     boolean isTopOrDownBorder() {
         if (currentPoint.y() == BasicMove.initiallyDataObject.getMapHeight() - 1) {
